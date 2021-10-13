@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\Toby\source\repos\Orangutan\Orangutan\main.cpp(61,23): warning C4018: '<': signed/unsigned mismatch
+  Orangutan.vcxproj -> C:\Users\Toby\source\repos\Orangutan\Debug\Orangutan.exe
