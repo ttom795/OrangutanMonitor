@@ -109,7 +109,7 @@ int main(int argc, char** argv)
     glutIdleFunc(idle);
     getPage* p = new getPage();
     pageTotal = p->getMaxSize();
-    //FreeConsole();
+    FreeConsole();
     glutMouseFunc(mouseFunc);
     glutMainLoop();
     return 0;
