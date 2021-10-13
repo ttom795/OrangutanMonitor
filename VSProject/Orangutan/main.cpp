@@ -67,17 +67,19 @@ void drawString(float x, float y, string name) {
 float bar, current;
 void display()
 {
-    bar = lerp(bar, (pageCurrent / pageTotal) - 0.5, 0.1);
     current = lerp(current, pageCurrent, 0.1);
-    bar = remap(bar, 0, 1, 0, 0.8);
-
+    bar = lerp(bar, (current/pageTotal), 0.1);
+    float tempBar = remap(bar, 0, 1, -0.7, 0.8);
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(1, 1, 1);
-    drawLine(-0.85, 0.8, -0.65, 0.8);
-    drawBar(-0.8, -0.7, 0.1, bar);
+    drawLine(-0.85, 0.8, -0.55, 0.8);
+    drawLine(-0.85, 0.05, -0.55, 0.05);
+    drawLine(-0.85, -0.7, -0.55, -0.7);
+    drawBar(-0.8, -0.7, 0.2, tempBar);
     drawString(-0.85, 0.85, ("Max Page Size: "+to_string((int)pageTotal)+"MB"));
+    drawString(-0.50, 0.05, ("50%"));
 
     if (preciseMode) {
         drawString(-0.8, -0.8, (to_string(current) + "/" + to_string(pageTotal)));
@@ -90,7 +92,7 @@ void display()
         glColor3f(buttonColorN[0], buttonColorN[1], buttonColorN[2]);
     }
     glRectf(buttonX, buttonY, buttonX+buttonSize, buttonY+buttonSize);
-    drawString(-0.15, buttonY+0.075, "Detail Mode");
+    drawString(-0.15, 0.05, "Detail Mode");
 
     glutSwapBuffers();
     glutPostRedisplay();
@@ -98,7 +100,6 @@ void display()
 
 int main(int argc, char** argv)
 {
-    
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(256, 256);
@@ -108,7 +109,7 @@ int main(int argc, char** argv)
     glutIdleFunc(idle);
     getPage* p = new getPage();
     pageTotal = p->getMaxSize();
-    FreeConsole();
+    //FreeConsole();
     glutMouseFunc(mouseFunc);
     glutMainLoop();
     return 0;
